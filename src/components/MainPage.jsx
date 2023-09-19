@@ -1,30 +1,27 @@
 import React, { useState } from "react";
-import './App.css'
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function MainPage() {
-  const [newPost, setNewPost] = useState(""); 
+  const [newPost, setNewPost] = useState("");
 
-  
   const handleInputChange = (e) => {
     setNewPost(e.target.value);
   };
 
-  
-  const handleCreatePost = () => {
+  const handleCreatePost = async (e) => {
+    e.preventDefault();
 
-    fetch("https://dummyjson.com/posts/add", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
+    try {
+      const response = await axios.post("https://dummyjson.com/posts/add", {
         title: newPost,
-        userId: 5,
-       
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data); 
       });
+
+      // Перенаправляем пользователя на страницу постов
+      navigate("./postsPage");
+    } catch (error) {
+      console.error("Ошибка при отправке запроса", error);
+    }
   };
 
   return (
@@ -37,7 +34,6 @@ function MainPage() {
         onChange={handleInputChange}
       />
       <button onClick={handleCreatePost}>Создать пост</button>
-      
     </div>
   );
 }
