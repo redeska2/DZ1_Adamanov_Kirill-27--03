@@ -1,24 +1,32 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function MainPage() {
-  const [newPost, setNewPost] = useState("");
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const navigate = useNavigate();
 
-  const handleInputChange = (e) => {
-    setNewPost(e.target.value);
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
   };
 
-  const handleCreatePost = async (e) => {
-    e.preventDefault();
+  const handleBodyChange = (e) => {
+    setBody(e.target.value);
+  };
 
+  const handleCreatePost = async () => {
     try {
-      const response = await axios.post("https://dummyjson.com/posts/add", {
-        title: newPost,
+      const response = await axios.post("https://dummyjson.com/products/add", {
+        title: title,
+        body: body,
       });
 
-      // Перенаправляем пользователя на страницу постов
-      navigate("./postsPage");
+      if (response.status === 200) {
+        navigate("/posts");
+      } else {
+        console.error("Ошибка при создании поста");
+      }
     } catch (error) {
       console.error("Ошибка при отправке запроса", error);
     }
@@ -30,8 +38,13 @@ function MainPage() {
       <input
         type="text"
         placeholder="Введите заголовок поста"
-        value={newPost}
-        onChange={handleInputChange}
+        value={title}
+        onChange={handleTitleChange}
+      />
+      <textarea
+        placeholder="Введите текст поста"
+        value={body}
+        onChange={handleBodyChange}
       />
       <button onClick={handleCreatePost}>Создать пост</button>
     </div>
