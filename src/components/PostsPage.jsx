@@ -6,7 +6,7 @@ function PostsPage() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    axios.get('https://dummyjson.com/posts')
+    axios.get('https://dummyjson.com/posts?userId=$%7BuserId%7D ')
       .then((response) => {
         setPosts(response.data.posts);
       })
