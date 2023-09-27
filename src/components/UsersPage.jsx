@@ -11,7 +11,7 @@ function UsersPage() {
     setUsers(response.data.users);
   };
 
-  // Обновить список пользователей
+ 
   useEffect(() => {
     getUsers();
   }, []);

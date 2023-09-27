@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../components/App.css'
-import products from './shop.json'; // Импортируйте ваш JSON-файл
+import products from './shop.json'; 
 
 function ProductsPage() {
     const [cartCount, setCartCount] = useState(0);

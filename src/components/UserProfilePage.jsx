@@ -35,7 +35,7 @@ function UserProfilePage() {
         if (error.response && error.response.status === 429) {
           console.error("Слишком много запросов, попробуйте позже.");
           setError("Слишком много запросов, попробуйте позже.");
-          setTimeout(fetchData, 10000); // Попробуйте снова через 10 секунд
+          setTimeout(fetchData, 10000); 
         } else {
           console.error("Ошибка при получении данных:", error);
           setPosts([]);

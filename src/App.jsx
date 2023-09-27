@@ -4,7 +4,7 @@ import MainPage from './components/MainPage';
 import PostsPage from './components/PostsPage';
 import UsersPage from './components/UsersPage'; 
 import UserProfilePage from './components/UserProfilePage';
-import ProductsPage from './components/ProductsPage'; // Новый импорт
+import ProductsPage from './components/ProductsPage'; 
 
 function App() {
   return (
@@ -14,7 +14,7 @@ function App() {
           <li><Link to="/">Main Page</Link></li>
           <li><Link to="/posts">Posts Page</Link></li>
           <li><Link to="/users">Users Page</Link></li>
-          <li><Link to="/products">Products Page</Link></li> {/* Новая ссылка */}
+          <li><Link to="/products">Products Page</Link></li> 
         </ul>
       </nav>
       
@@ -23,7 +23,7 @@ function App() {
         <Route path="/posts" element={<PostsPage />} />
         <Route path="/users" element={<UsersPage />} />
         <Route path="/user/:userId" element={<UserProfilePage />} />
-        <Route path="/products" element={<ProductsPage />} /> {/* Новый маршрут */}
+        <Route path="/products" element={<ProductsPage />} /> 
       </Routes>
     </>
   );

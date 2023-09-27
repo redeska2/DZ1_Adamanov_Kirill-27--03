@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'; // Исправлен оператор импорта
+import ReactDOM from 'react-dom'; 
 import App from './App.jsx';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
