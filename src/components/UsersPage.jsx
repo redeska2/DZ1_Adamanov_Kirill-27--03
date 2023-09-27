@@ -7,7 +7,7 @@ function UsersPage() {
 
   // Получить список пользователей
   const getUsers = async () => {
-    const response = await axios.get("https://dummyjson.com/users");
+    const response = await axios.get("https://dummyjson.com/users?limit=100");
     setUsers(response.data.users);
   };
 
