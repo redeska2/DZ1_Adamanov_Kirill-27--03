@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Routes, Route, Link } from 'react-router-dom';
 import MainPage from './components/MainPage';
 import PostsPage from './components/PostsPage';
