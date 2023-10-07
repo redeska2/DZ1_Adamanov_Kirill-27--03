@@ -5,8 +5,10 @@ import UsersPage from './components/UsersPage';
 import UserProfilePage from './components/UserProfilePage';
 import ProductsPage from './components/ProductsPage'; 
 import CartPage from './components/CartPage'; 
+import CreatePostPage from './DZ7/CreatePostPage';  // <-- Импорт страницы создания поста
 import './index.css'; 
-import { CartProvider } from './components/CartContext'
+import PostsPageDZ7 from './DZ7/PostsPageDZ7';
+import { CartProvider } from './components/CartContext';
 
 function App() {
   const location = useLocation();
@@ -19,7 +21,10 @@ function App() {
           <li><Link to="/">Main Page</Link></li>
           <li><Link to="/posts">Posts Page</Link></li>
           <li><Link to="/users">Users Page</Link></li>
-          <li><Link to="/products">Products Page</Link></li> 
+          <li><Link to="/products">Products Page</Link></li>
+          <li><Link to="/create-post">Create Post</Link></li>  
+          <li><Link to="/posts">Posts PageDZ7</Link></li>
+
         </ul>
       </nav>
       
@@ -30,16 +35,13 @@ function App() {
         <Route path="/user/:userId" element={<UserProfilePage />} />
         <Route path="/products" element={<ProductsPage />} /> 
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/create-post" element={<CreatePostPage />} />
+        <Route path="/posts" element={<PostsPageDZ7 />} />
+
       </Routes>
       
       <div className="footer">
-        <ul>
-          <li><Link to="/">Main Page</Link></li>
-          <li><Link to="/posts">Posts Page</Link></li>
-          <li><Link to="/users">Users Page</Link></li>
-          <li><Link to="/products">Products Page</Link></li>
-          {isProductsPage && <li><Link to="/cart"><img src="https://png.pngtree.com/png-vector/20190330/ourmid/pngtree-vector-shopping-cart-icon-png-image_889941.jpg" alt="Корзина" width="20" height="20" /></Link></li>}
-        </ul>
+        ...
       </div>
     </>
   );
