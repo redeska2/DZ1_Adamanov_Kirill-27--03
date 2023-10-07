@@ -1,32 +1,42 @@
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
-import { useCart } from './CartContext'; // Убедитесь, что путь верный
-
+import { removeFromCart } from "./productsSlice"; 
 function CartPage() {
-    const { cart } = useCart(); // Получаем состояние корзины из контекста корзины
+    const cart = useSelector(state => state.products.cartItems); 
+    const dispatch = useDispatch();
 
-    // Если корзина пуста, отображаем сообщение
-    if (cart.length === 0) return (
-        <div>
-            <h1>Ваша Корзина</h1>
-            <p>Корзина пуста</p>
-            <Link to="/products">Продолжить Покупки</Link>
-        </div>
-    );
+    const total = cart.reduce((sum, product) => sum + parseFloat(product.price.replace('$', '')), 0);
+    const exchangeRate = 88.7;
 
-    // Если в корзине есть товары, отображаем их
+    const handleRemoveFromCart = (productToRemove) => {
+        dispatch(removeFromCart(productToRemove._id)); 
+    };
+
+    if (!cart.length) {
+        return (
+            <div>
+                <h1>Ваша Корзина</h1>
+                <p>Корзина пуста</p>
+                <Link to="/products">Продолжить Покупки</Link>
+            </div>
+        );
+    }
+
     return (
         <div>
             <h1>Ваша Корзина</h1>
-            {cart.map((product, index) => (
-                <div key={index}>
-                    <p>{product.title} - ${product.price} (~{(product.price * 88.7).toFixed(2)} сом)</p>
+            {cart.map((product) => (
+                <div key={product._id} className="cart-item">
+                    <p>{product.name} - ${product.price} (~{(parseFloat(product.price.replace('$', '')) * exchangeRate).toFixed(2)} сом)</p>
+                    <button onClick={() => handleRemoveFromCart(product)}>Удалить</button>
                 </div>
             ))}
-            <p>
-                Итого: ${cart.reduce((sum, product) => sum + product.price, 0).toFixed(2)}
-                (~{(cart.reduce((sum, product) => sum + product.price, 0) * 88.7).toFixed(2)} сом)
-            </p>
-            <button>Оплатить</button>
+            <div className="cart-summary">
+                <p>
+                    Итого: ${total.toFixed(2)} (~{(total * exchangeRate).toFixed(2)} сом)
+                </p>
+                <button>Оплатить</button>
+            </div>
             <Link to="/products">Продолжить Покупки</Link>
         </div>
     );

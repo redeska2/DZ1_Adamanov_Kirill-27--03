@@ -25,12 +25,12 @@ function CreatePost() {
         body: JSON.stringify({
           title,
           userId,
-          // other post data
+          
         }),
       });
 
       if (response.ok) {
-        // Перенаправляем на список постов при успешном создании поста
+        
         navigate('/posts');
       } else {
         console.error('Ошибка при создании поста');
@@ -52,7 +52,7 @@ function CreatePost() {
           <label>User ID:</label>
           <input type="number" value={userId} onChange={handleUserIdChange} />
         </div>
-        {/* Добавьте другие поля для данных поста, если необходимо */}
+       
         <button type="submit">Create Post</button>
       </form>
     </div>
